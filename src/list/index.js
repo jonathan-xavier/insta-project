@@ -1,6 +1,16 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 const List = (props) => {
+
+  const mostraLikes = (likers)   => {
+    if(likers == 0){
+      return;
+    }
+
+    return (
+      <Text style={styles.likes}>{likers} {likers > 1 ? "curtidas" : "curtida"}</Text>
+    )
+  }
   return (
     <View>
       <View style={styles.viewPerfil}>
@@ -35,7 +45,25 @@ const List = (props) => {
           />
           
         </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Image
+            source={require('../assets/send.png')}
+            style={styles.iconeSend}
+          />
+        </TouchableOpacity>
       </View>
+
+      {mostraLikes(props.data.likers)}
+
+      <Text style={styles.nomeRodape}>
+        {props.data.nome}
+      </Text>
+
+      <Text style={styles.descRodape}>
+        {props.data.descricao}    
+      </Text>
+
     </View>
   );
 };
@@ -71,6 +99,27 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 5,
   },
+  iconeSend: {
+    height: 30,
+    width: 33,
+    marginTop: 5,
+    marginLeft: 5
+  },
+  likes: {
+    fontWeight: 'bold',
+    marginLeft: 5,
+    marginTop: 5
+  },
+  nomeRodape: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingLeft: 5
+  }, 
+  descRodape: {
+    paddingLeft: 5,
+    paddingBottom: 10,
+    fontSize: 15, 
+  }
 });
 
 export default List;
